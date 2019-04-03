@@ -24,3 +24,21 @@ for src_dir, dirs, files in os.walk(root_src_dir):
         elif operation is 'move':
             shutil.move(src_file, dst_dir)
 ```
+
+
+```python
+from datetime import datetime
+import os
+
+file_path = <PASS YOUR FILE HERE>
+
+csv_file = 'myfile_' + str(datetime.now().strftime('%Y_%m_%d_%H_%M_%S')) + '.csv'
+
+csv_file_full = os.path.join(file_path, os.sep, csv_file)
+```
+
+```python
+import time
+timestr = time.strftime("_%d_%m_%Y")
+print(timestr)
+```
