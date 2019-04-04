@@ -1,28 +1,40 @@
 # python-copy
 
 ```python
-import os
-import shutil
+from datetime import datetime
+from os import mkdir, path, remove, walk
+from shutil import copy2, move
+from time import strftime
 
-root_src_dir = os.path.join('.', 'C:\\Users\\agupta78\\Desktop\\folder1')
-root_target_dir = os.path.join(
-    '.', 'C:\\Users\\agupta78\\Desktop\\folder1\\Archive')
+root_src_dir = path.join('', r'C:\Users\agupta78\Desktop\folder1')
+root_dst_dir = path.join('', r'C:\Users\agupta78\Desktop\folder2')
 
 operation = 'copy'  # 'copy' or 'move'
 
-for src_dir, dirs, files in os.walk(root_src_dir):
-    dst_dir = src_dir.replace(root_src_dir, root_target_dir)
-    if not os.path.exists(dst_dir):
-        os.mkdir(dst_dir)
+for src_dir, dirs, files in walk(root_src_dir):
+    dst_dir = src_dir.replace(root_src_dir, root_dst_dir)
+    if not path.exists(dst_dir):
+        mkdir(dst_dir)
     for file_ in files:
-        src_file = os.path.join(src_dir, file_)
-        dst_file = os.path.join(dst_dir, file_)
-        if os.path.exists(dst_file):
-            os.remove(dst_file)
+        src_file = path.join(src_dir, file_)
+        dst_file = path.join(dst_dir, file_)
+        if path.exists(dst_file):
+            remove(dst_file)
         if operation is 'copy':
-            shutil.copy(src_file, dst_dir)
+            copy2(src_file, dst_dir)
         elif operation is 'move':
-            shutil.move(src_file, dst_dir)
+            move(src_file, dst_dir)
+
+current_date = str(datetime.now().strftime('%d_%m_%Y'))
+print(current_date)
+# print(type(current_date))
+
+# for dst_file in walk(dst_dir):
+#     file_time = str(datetime.now().strftime('%d_%m_%Y'))
+#     # tupe_to_string = ''.join(dst_file)
+#     full_path = path.join(
+#         path.abspath(fsdecode(dst_file)), sep, file_time)
+
 ```
 
 
