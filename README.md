@@ -1,6 +1,8 @@
 # python-copy
 
-Go to backup.py for a much refined version of the code
+This readme is used as a test and trial ground for the code below. Rough code is added/deleted as required. Kindly refer to below mentioned file proper code.
+
+Go to backup.py for a much refined version of the code below
 
 ```python
 from datetime import datetime
