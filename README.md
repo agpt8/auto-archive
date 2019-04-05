@@ -27,7 +27,12 @@ for src_dir, dirs, files in walk(root_src_dir):
 
 current_date = str(datetime.now().strftime('%d_%m_%Y'))
 print(current_date)
-# print(type(current_date))
+
+files_list = listdir(root_dst_dir)
+print(files_list)
+chdir(root_dst_dir)
+for file_name in files_list:
+    rename(file_name, file_name + current_date)
 
 # for dst_file in walk(dst_dir):
 #     file_time = str(datetime.now().strftime('%d_%m_%Y'))
