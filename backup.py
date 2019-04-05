@@ -86,7 +86,7 @@ def perform_opertation():
     Returns:
         none
     '''
-    for src_dir, files in os.walk(root_src_dir):
+    for src_dir, dirs, files in os.walk(root_src_dir):
         dst_dir = src_dir.replace(root_src_dir, root_dst_dir)
         if not os.path.exists(dst_dir):
             os.mkdir(dst_dir)
