@@ -72,8 +72,10 @@ def rename_items(directory: str):
     items_list = os.listdir(directory)
     os.chdir(directory)
     for item_name in items_list:
+        # Preserving file extensions
         file_extension = os.path.splitext(item_name)[1]
         os.rename(item_name, item_name + get_date() + file_extension)
+
 
 root_src_dir = os.path.join('', get_source())
 root_dst_dir = os.path.join('', get_destination())
@@ -89,8 +91,10 @@ def perform_opertation():
     '''
     for src_dir, dirs, files in os.walk(root_src_dir):
         dst_dir = src_dir.replace(root_src_dir, root_dst_dir)
+
         if not os.path.exists(dst_dir):
             os.mkdir(dst_dir)
+
         for file_ in files:
             src_file = os.path.join(src_dir, file_)
             dst_file = os.path.join(dst_dir, file_)
@@ -98,8 +102,10 @@ def perform_opertation():
                 os.remove(dst_file)
             if user_operation is 'copy':
                 shutil.copy2(src_file, dst_dir)
+                # print('\nCopy complete\n')
             elif user_operation is 'move':
                 shutil.move(src_file, dst_dir)
+                # print('\nMove complete\n')
 
 
 def main():
@@ -109,11 +115,21 @@ def main():
     Returns:
         none
     '''
-    # get_source()
-    # get_destination()
-    # get_operation()
     perform_opertation()
     rename_items(root_dst_dir)
+
+    # # Restart if user wants to..
+    # restart = input(
+    #     '\nWould you like to restart? Type \'yes\' or \'no\'.\n').lower()
+    # while restart not in ['yes', 'no']:
+    #     print("Invalid input. Please type 'yes' or 'no'.")
+    #     restart = input(
+    #         '\nWould you like to restart? Type \'yes\' or \'no\'.\n').lower()
+    # if restart == 'yes':
+    #     main()
+    # else:
+    #     print("Good Bye!")
+    #     return
 
 if __name__ == "__main__":
     main()
