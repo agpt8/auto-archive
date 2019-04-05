@@ -3,7 +3,7 @@ import shutil
 from datetime import datetime
 
 
-def get_source():
+def get_source() -> str:
     '''Ask user for source path of the files and folder he/she wants to copy/move
     Args:
         none
@@ -18,7 +18,7 @@ def get_source():
         raise exception
 
 
-def get_destination():
+def get_destination() -> str:
     '''Ask user for destination path where he/she wants to copy/move the files and folders
     Args:
         none
@@ -27,13 +27,13 @@ def get_destination():
     '''
     dst_path = ''
     try:
-        dst_path = input('\nEnter destination path with forward slah (/): ')
+        dst_path = input('\nEnter destination path with forward slash (/): ')
         return dst_path
     except Exception as exception:
         raise exception
 
 
-def get_operation():
+def get_operation() -> str:
     '''Ask user for operation he/she wants to perform on the files
     Args:
         none
@@ -51,7 +51,7 @@ def get_operation():
             print('Please enter a valid operation.\n')
 
 
-def get_date():
+def get_date() -> str:
     '''Get current date in this format: _dd_mm_YYYY
     Args:
         none
@@ -62,7 +62,7 @@ def get_date():
     return current_date
 
 
-def rename_items(directory):
+def rename_items(directory: str):
     '''Rename files and folders in the directory to include currennt date in a specific format. See {get_date()} method
     Args:
         directory: directory in which renaming has to be done
@@ -79,14 +79,14 @@ root_dst_dir = os.path.join('', get_destination())
 user_operation = get_operation()
 
 
-def perform_action():
+def perform_opertation():
     '''Perform the opertation told by the user on the files and folders at user specified path.
     Args:
         none
     Returns:
         none
     '''
-    for src_dir, dirs, files in os.walk(root_src_dir):
+    for src_dir, files in os.walk(root_src_dir):
         dst_dir = src_dir.replace(root_src_dir, root_dst_dir)
         if not os.path.exists(dst_dir):
             os.mkdir(dst_dir)
@@ -99,3 +99,20 @@ def perform_action():
                 shutil.copy2(src_file, dst_dir)
             elif user_operation is 'move':
                 shutil.move(src_file, dst_dir)
+
+
+def main():
+    '''Starts the program
+    Args:
+        none
+    Returns:
+        none
+    '''
+    # get_source()
+    # get_destination()
+    # get_operation()
+    perform_opertation()
+    rename_items(root_dst_dir)
+
+if __name__ == "__main__":
+    main()
