@@ -59,3 +59,35 @@ import time
 timestr = time.strftime("_%d_%m_%Y")
 print(timestr)
 ```
+
+```python
+#%%
+from datetime import datetime
+import os
+import time
+from os import mkdir, path, remove, walk
+import os 
+  
+# Function to rename multiple files 
+
+root_src_dir = path.join('', r'C:\Users\JoshiChi\Desktop\folder1') 
+i = 0
+timestr = time.strftime("_%d_%m_%Y")
+print(timestr)
+    
+for filename in os.listdir(root_src_dir): 
+    dst = str(i) + timestr + ".txt"
+    src =root_src_dir+ '\\'+ filename 
+    dst =root_src_dir+'\\'+ dst 
+        
+    # rename() function will 
+    # rename all the files 
+    os.rename(src, dst) 
+    i += 1
+  
+
+#csv_file = 'myfile_' + str(datetime.now().strftime('%Y_%m_%d_%H_%M_%S')) + '.csv'
+
+#sv_file_full = os.path.join(file_path, os.sep, csv_file)
+#%%
+```
