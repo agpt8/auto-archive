@@ -1,5 +1,7 @@
 # python-copy
 
+Go to backup.py for a much refined version of the code
+
 ```python
 from datetime import datetime
 from os import mkdir, path, remove, walk
