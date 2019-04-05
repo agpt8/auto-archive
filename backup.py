@@ -12,7 +12,7 @@ def get_source() -> str:
     '''
     src_path = ''
     try:
-        src_path = input('\nEnter source path with forward slash (/): ')
+        src_path = input('\nEnter source path: ')
         return src_path
     except Exception as exception:
         raise exception
@@ -27,7 +27,7 @@ def get_destination() -> str:
     '''
     dst_path = ''
     try:
-        dst_path = input('\nEnter destination path with forward slash (/): ')
+        dst_path = input('\nEnter destination path: ')
         return dst_path
     except Exception as exception:
         raise exception
