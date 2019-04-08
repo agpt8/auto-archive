@@ -2,6 +2,8 @@ import os
 import shutil
 from datetime import datetime
 
+from validator import is_path_exists_or_creatable
+
 
 def get_source() -> str:
     '''Ask user for source path of the files and folder he/she wants to copy/move
@@ -10,10 +12,15 @@ def get_source() -> str:
     Returns:
         (str) Source path of the files and folders
     '''
+    # TODO: Make changes to code so that it asks the user for source path till valid path is provided.
     src_path = ''
     try:
         src_path = input('\nEnter source path: ')
-        return src_path
+        valid_src_path = is_path_exists_or_creatable(src_path)
+        if valid_src_path == True:
+            return src_path
+        else:
+            print('\nPlease enter a valid source path.\n')
     except Exception as exception:
         raise exception
 
@@ -25,10 +32,15 @@ def get_destination() -> str:
     Returns:
         (str) Destination path for the files and folders
     '''
+    # TODO: Make changes to code so that it asks the user for destination path till valid path is provided.
     dst_path = ''
     try:
         dst_path = input('\nEnter destination path: ')
-        return dst_path
+        valid_dst_path = validator.is_path_exists_or_creatable(dst_path)
+        if valid_dst_path == True:
+            return dst_path
+        else:
+            print('\nPlease enter a valid destination path.\n')
     except Exception as exception:
         raise exception
 
@@ -63,12 +75,13 @@ def get_date() -> str:
 
 
 def rename_items(directory: str):
-    '''Rename files and folders in the directory to include currennt date in a specific format. See {get_date()} method
+    '''Rename files and folders in the directory to include currennt date in a specific format. # SEE (get_date()) method
     Args:
         directory: directory in which renaming has to be done
     Returns:
         none
     '''
+    # FIXME: Renaming does not rename sub-folder and files.
     items_list = os.listdir(directory)
     os.chdir(directory)
     for item_name in items_list:
@@ -102,10 +115,9 @@ def perform_opertation():
                 os.remove(dst_file)
             if user_operation is 'copy':
                 shutil.copy2(src_file, dst_dir)
-                # print('\nCopy complete\n')
             elif user_operation is 'move':
+                # FIXME: moving the files does not move the folder but rather make a copy of them
                 shutil.move(src_file, dst_dir)
-                # print('\nMove complete\n')
 
 
 def main():
@@ -117,6 +129,7 @@ def main():
     '''
     perform_opertation()
     rename_items(root_dst_dir)
+    # TODO: Ask user if he/she wants to start over.
 
     # # Restart if user wants to..
     # restart = input(
