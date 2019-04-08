@@ -72,9 +72,9 @@ def rename_items(directory: str):
     items_list = os.listdir(directory)
     os.chdir(directory)
     for item_name in items_list:
-        # Preserving file extensions
+        file_name = os.path.splitext(item_name)[0]
         file_extension = os.path.splitext(item_name)[1]
-        os.rename(item_name, item_name + get_date() + file_extension)
+        os.rename(item_name, file_name + get_date() + file_extension)
 
 
 root_src_dir = os.path.join('', get_source())
