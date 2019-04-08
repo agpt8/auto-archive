@@ -36,7 +36,7 @@ def get_destination() -> str:
     dst_path = ''
     try:
         dst_path = input('\nEnter destination path: ')
-        valid_dst_path = validator.is_path_exists_or_creatable(dst_path)
+        valid_dst_path = is_path_exists_or_creatable(dst_path)
         if valid_dst_path == True:
             return dst_path
         else:
