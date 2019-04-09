@@ -4,10 +4,6 @@ from datetime import datetime
 
 from validator import is_path_exists_or_creatable
 
-root_src_dir = os.path.join('', get_source())
-root_dst_dir = os.path.join('', get_destination())
-user_operation = get_operation()
-
 
 def get_source() -> str:
     '''Ask user for source path of the files and folder he/she wants to copy/move
@@ -76,6 +72,11 @@ def get_date() -> str:
     '''
     current_date = str(datetime.now().strftime('_%d_%m_%Y'))
     return current_date
+
+
+root_src_dir = os.path.join('', get_source())
+root_dst_dir = os.path.join('', get_destination())
+user_operation = get_operation()
 
 
 def change_name(path_: str, item: str, old: str, new: str):
