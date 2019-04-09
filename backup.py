@@ -78,7 +78,7 @@ def get_date() -> str:
     return current_date
 
 
-def change_name(path_, item, old, new):
+def change_name(path_: str, item: str, old: str, new: str):
     '''Change the name of the files and folders in given path
     Args:
         path_: Path in which names have to be changed
@@ -94,7 +94,7 @@ def change_name(path_, item, old, new):
     os.rename(new_path, new_name)
 
 
-def folder_recurse(folder_path, old, new):
+def folder_recurse(folder_path: str, old: str, new: str):
     '''Recurse through folders to rename the folder iteself and items inside.
     Args:
         folder_path: Path of folder to recurse
@@ -118,7 +118,7 @@ def rename_items(directory: str):
     Returns:
         none
     '''
-    # FIXME: Renaming does not rename sub-folder and files. Current working implementation in this function only.
+    # FIXME: Renaming does not rename sub-folder and files. Current implementation in this function only.
     items_list = os.listdir(directory)
     os.chdir(directory)
     for item_name in items_list:
