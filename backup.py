@@ -4,6 +4,10 @@ from datetime import datetime
 
 from validator import is_path_exists_or_creatable
 
+root_src_dir = os.path.join('', get_source())
+root_dst_dir = os.path.join('', get_destination())
+user_operation = get_operation()
+
 
 def get_source() -> str:
     '''Ask user for source path of the files and folder he/she wants to copy/move
@@ -74,25 +78,55 @@ def get_date() -> str:
     return current_date
 
 
+def change_name(path_, item, old, new):
+    '''Change the name of the files and folders in given path
+    Args:
+        path_: Path in which names have to be changed
+        item: files/folders
+        old: old name
+        new: new name
+    Returns:
+        none
+    '''
+    # FIXME: Partially working. Sometimes folders doesn't get renamed along with files inside.
+    new_path = os.path.join(path_, item)
+    new_name = os.path.join(path_, item.replace(old, new))
+    os.rename(new_path, new_name)
+
+
+def folder_recurse(folder_path, old, new):
+    '''Recurse through folders to rename the folder iteself and items inside.
+    Args:
+        folder_path: Path of folder to recurse
+        old: old name
+        new: new name to be replaced
+    '''
+    # FIXME: Same error as function change_name()
+    for path, subdirs, files in os.walk(folder_path):
+        for name in files:
+            if(old in name):
+                change_name(path, name, old, new)
+        for sub_dir in subdirs:
+            if(old in sub_dir):
+                change_name(path, sub_dir, old, new)
+
+
 def rename_items(directory: str):
-    '''Rename files and folders in the directory to include currennt date in a specific format. # SEE (get_date()) method
+    '''Rename files and folders in the directory to include currennt date in a specific format. See get_date() method
     Args:
         directory: directory in which renaming has to be done
     Returns:
         none
     '''
-    # FIXME: Renaming does not rename sub-folder and files.
+    # FIXME: Renaming does not rename sub-folder and files. Current working implementation in this function only.
     items_list = os.listdir(directory)
     os.chdir(directory)
     for item_name in items_list:
         file_name = os.path.splitext(item_name)[0]
         file_extension = os.path.splitext(item_name)[1]
-        os.rename(item_name, file_name + get_date() + file_extension)
-
-
-root_src_dir = os.path.join('', get_source())
-root_dst_dir = os.path.join('', get_destination())
-user_operation = get_operation()
+        new_name = file_name + get_date() + file_extension
+        os.rename(item_name, new_name)
+        # folder_recurse(root_dst_dir, file_name, new_name)
 
 
 def perform_opertation():
