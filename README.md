@@ -4,6 +4,21 @@ This readme is used as a test and trial ground for the code below. Rough code is
 
 Go to [backup.py](https://github.com/agpt8/python-copy/blob/master/backup.py) for a much refined version of the code below
 
+Resources used:
+https://stackoverflow.com/questions/9532499/check-whether-a-path-is-valid-in-python-without-creating-a-file-at-the-paths-ta
+
+https://stackoverflow.com/questions/17558181/determine-if-string-input-could-be-a-valid-directory-in-python
+
+https://stackoverflow.com/questions/38596511/python-how-to-retain-the-file-extension-when-renaming-files-with-os
+
+http://takluyver.github.io/posts/so-you-want-to-write-a-desktop-app-in-python.html
+
+https://www.zeolearn.com/magazine/10-steps-for-getting-started-guis-with-python
+
+https://www.python.org/dev/peps/pep-0350/
+
+
+
 ```python
 from datetime import datetime
 from os import mkdir, path, remove, walk
