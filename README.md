@@ -28,7 +28,10 @@ For more insformation on building with pyinstaller and different options that ca
 
 After the above steps are complete, you can run the script independently.
 
+## Contributions
+
+All PRs are welcome
+
 ## Known issues
 
-- Sometimes folders and files inside them may not get renamed
-- Sometimes moving files may not move but copy them
+There are bugs present in the script. See [issues](https://github.com/agpt8/auto-archive/issues/) for more details
