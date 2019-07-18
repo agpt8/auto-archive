@@ -119,7 +119,7 @@ def rename_items(directory: str):
     Returns:
         none
     '''
-    # FIXME: Renaming does not rename sub-folder and files. Current implementation in this function only.
+    # FIXME: Renaming does not rename sub-folder and files. Current using this function for renaming.
     items_list = os.listdir(directory)
     os.chdir(directory)
     for item_name in items_list:
