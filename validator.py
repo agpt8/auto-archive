@@ -4,21 +4,21 @@ import tempfile
 
 # Sadly, Python fails to provide the following magic number for us.
 ERROR_INVALID_NAME = 123
-'''
-Windows-specific error code indicating an invalid pathname.
 
-See Also
-----------
-https://msdn.microsoft.com/en-us/library/windows/desktop/ms681382%28v=vs.85%29.aspx
-    Official listing of all such codes.
-'''
+
+# Windows-specific error code indicating an invalid pathname.
+#
+# See Also
+# ----------
+# https://msdn.microsoft.com/en-us/library/windows/desktop/ms681382%28v=vs.85%29.aspx
+#     Official listing of all such codes.
 
 
 def is_pathname_valid(pathname: str) -> bool:
-    '''
+    """
     `True` if the passed pathname is a valid pathname for the current OS;
     `False` otherwise.
-    '''
+    """
     # If this pathname is either not a string or is but is empty, this pathname
     # is invalid.
     try:
@@ -36,7 +36,7 @@ def is_pathname_valid(pathname: str) -> bool:
         # environment variable); else, the typical root directory.
         root_dirname = os.environ.get('HOMEDRIVE', 'C:') \
             if os.sys.platform == 'win32' else os.path.sep
-        assert os.path.isdir(root_dirname)   # ...Murphy and her ironclad Law
+        assert os.path.isdir(root_dirname)  # ...Murphy and her ironclad Law
 
         # Append a path separator to this directory if needed.
         root_dirname = root_dirname.rstrip(os.path.sep) + os.path.sep
@@ -85,10 +85,10 @@ def is_pathname_valid(pathname: str) -> bool:
 
 
 def is_path_creatable(pathname: str) -> bool:
-    '''
+    """
     `True` if the current user has sufficient permissions to create the passed
     pathname; `False` otherwise.
-    '''
+    """
     # Parent directory of the passed path. If empty, we substitute the current
     # working directory (CWD) instead.
     dirname = os.path.dirname(pathname) or os.getcwd()
@@ -96,17 +96,17 @@ def is_path_creatable(pathname: str) -> bool:
 
 
 def is_path_exists_or_creatable(pathname: str) -> bool:
-    '''
+    """
     `True` if the passed pathname is a valid pathname for the current OS _and_
     either currently exists or is hypothetically creatable; `False` otherwise.
 
     This function is guaranteed to _never_ raise exceptions.
-    '''
+    """
     try:
         # To prevent "os" module calls from raising undesirable exceptions on
         # invalid pathnames, is_pathname_valid() is explicitly called first.
         return is_pathname_valid(pathname) and (
-            os.path.exists(pathname) or is_path_creatable(pathname))
+                os.path.exists(pathname) or is_path_creatable(pathname))
     # Report failure on non-fatal filesystem complaints (e.g., connection
     # timeouts, permissions issues) implying this path to be inaccessible. All
     # other exceptions are unrelated fatal issues and should not be caught here.
@@ -115,11 +115,11 @@ def is_path_exists_or_creatable(pathname: str) -> bool:
 
 
 def is_path_sibling_creatable(pathname: str) -> bool:
-    '''
+    """
     `True` if the current user has sufficient permissions to create **siblings**
     (i.e., arbitrary files in the parent directory) of the passed pathname;
     `False` otherwise.
-    '''
+    """
     # Parent directory of the passed path. If empty, we substitute the current
     # working directory (CWD) instead.
     dirname = os.path.dirname(pathname) or os.getcwd()
@@ -138,18 +138,18 @@ def is_path_sibling_creatable(pathname: str) -> bool:
 
 
 def is_path_exists_or_creatable_portable(pathname: str) -> bool:
-    '''
+    """
     `True` if the passed pathname is a valid pathname on the current OS _and_
     either currently exists or is hypothetically creatable in a cross-platform
     manner optimized for POSIX-unfriendly filesystems; `False` otherwise.
 
     This function is guaranteed to _never_ raise exceptions.
-    '''
+    """
     try:
         # To prevent "os" module calls from raising undesirable exceptions on
         # invalid pathnames, is_pathname_valid() is explicitly called first.
         return is_pathname_valid(pathname) and (
-            os.path.exists(pathname) or is_path_sibling_creatable(pathname))
+                os.path.exists(pathname) or is_path_sibling_creatable(pathname))
     # Report failure on non-fatal filesystem complaints (e.g., connection
     # timeouts, permissions issues) implying this path to be inaccessible. All
     # other exceptions are unrelated fatal issues and should not be caught here.

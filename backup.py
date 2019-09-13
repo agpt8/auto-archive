@@ -6,18 +6,18 @@ from validator import is_path_exists_or_creatable
 
 
 def get_source() -> str:
-    '''Ask user for source path of the files and folder he/she wants to copy/move
+    """Ask user for source path of the files and folder he/she wants to copy/move
     Args:
         none
     Returns:
         (str) Source path of the files and folders
-    '''
+    """
     # TODO: Make changes to code so that it asks the user for source path till valid path is provided.
     src_path = ''
     try:
         src_path = input('\nEnter source path: ')
         valid_src_path = is_path_exists_or_creatable(src_path)
-        if valid_src_path == True:
+        if valid_src_path:
             return src_path
         else:
             print('\nPlease enter a valid source path.\n')
@@ -26,18 +26,18 @@ def get_source() -> str:
 
 
 def get_destination() -> str:
-    '''Ask user for destination path where he/she wants to copy/move the files and folders
+    """Ask user for destination path where he/she wants to copy/move the files and folders
     Args:
         none
     Returns:
         (str) Destination path for the files and folders
-    '''
+    """
     # TODO: Make changes to code so that it asks the user for destination path till valid path is provided.
     dst_path = ''
     try:
         dst_path = input('\nEnter destination path: ')
         valid_dst_path = is_path_exists_or_creatable(dst_path)
-        if valid_dst_path == True:
+        if valid_dst_path:
             return dst_path
         else:
             print('\nPlease enter a valid destination path.\n')
@@ -46,12 +46,12 @@ def get_destination() -> str:
 
 
 def get_operation() -> str:
-    '''Ask user for operation he/she wants to perform on the files
+    """Ask user for operation he/she wants to perform on the files
     Args:
         none
     Returns:
         (str) Operation to be performed
-    '''
+    """
     operation = ''
     while operation.lower() not in ['copy', 'move']:
         operation = input('\nDo you want to copy or move the files? Type copy or move.\n').lower()
@@ -64,12 +64,12 @@ def get_operation() -> str:
 
 
 def get_date() -> str:
-    '''Get current date in this format: _dd_mm_YYYY
+    """Get current date in this format: _dd_mm_YYYY
     Args:
         none
     Returns:
         (str) Current date in the given format
-    '''
+    """
     current_date = str(datetime.now().strftime('_%d_%m_%Y'))
     return current_date
 
@@ -80,7 +80,7 @@ user_operation = get_operation()
 
 
 def change_name(path_: str, item: str, old: str, new: str):
-    '''Change the name of the files and folders in given path
+    """Change the name of the files and folders in given path
     Args:
         path_: Path in which names have to be changed
         item: files/folders
@@ -88,7 +88,7 @@ def change_name(path_: str, item: str, old: str, new: str):
         new: new name
     Returns:
         none
-    '''
+    """
     # FIXME: Partially working. Sometimes folders doesn't get renamed along with files inside.
     new_path = os.path.join(path_, item)
     new_name = os.path.join(path_, item.replace(old, new))
@@ -105,10 +105,10 @@ def folder_recurse(folder_path: str, old: str, new: str):
     # FIXME: Same error as function change_name()
     for path, subdirs, files in os.walk(folder_path):
         for name in files:
-            if(old in name):
+            if old in name:
                 change_name(path, name, old, new)
         for sub_dir in subdirs:
-            if(old in sub_dir):
+            if old in sub_dir:
                 change_name(path, sub_dir, old, new)
 
 
@@ -130,13 +130,13 @@ def rename_items(directory: str):
         # folder_recurse(root_dst_dir, file_name, new_name)
 
 
-def perform_opertation():
-    '''Perform the opertation told by the user on the files and folders at user specified path.
+def perform_operation():
+    """Perform the operation told by the user on the files and folders at user specified path.
     Args:
         none
     Returns:
         none
-    '''
+    """
     for src_dir, dirs, files in os.walk(root_src_dir):
         dst_dir = src_dir.replace(root_src_dir, root_dst_dir)
 
@@ -156,16 +156,16 @@ def perform_opertation():
 
 
 def main():
-    '''Starts the program
+    """Starts the program
     Args:
         none
     Returns:
         none
-    '''
-    perform_opertation()
+    """
+    perform_operation()
     rename_items(root_dst_dir)
-    # TODO: Ask user if he/she wants to start over.
 
+    # TODO: Ask user if he/she wants to start over.
     # # Restart if user wants to..
     # restart = input(
     #     '\nWould you like to restart? Type \'yes\' or \'no\'.\n').lower()
@@ -178,6 +178,7 @@ def main():
     # else:
     #     print("Good Bye!")
     #     return
+
 
 if __name__ == "__main__":
     main()
